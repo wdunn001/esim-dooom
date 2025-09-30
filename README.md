@@ -8,7 +8,7 @@ A complete, playable Doom-like game that runs on SIM cards with just 8KB of memo
 - **Text-only graphics**: Pure ASCII display (40x25 characters)
 - **Tiny footprint**: Entire game fits in 8KB
 - **SIM card ready**: APDU interface for real hardware deployment
-- **No dependencies**: Pure C, no Java required
+- **No dependencies**: Pure C
 
 ## Quick Start
 
@@ -116,17 +116,6 @@ This game can run on actual SIM card hardware. See [docs/SIM_DEPLOYMENT.md](docs
 - **Display**: 40x25 ASCII characters
 - **Performance**: 5-10 FPS on SIM hardware
 
-## Repository
-
-Ready for GitHub:
-```bash
-git init
-git add .
-git commit -m "Text Doom - Complete game for SIM cards"
-git remote add origin YOUR_GITHUB_URL
-git push -u origin main
-```
-
 ## License
 
 This project is licensed under GPLv3 (same as Doom).
@@ -134,5 +123,4 @@ This project is licensed under GPLv3 (same as Doom).
 ## Acknowledgments
 
 - Inspired by the original Doom (id Software)
-- Learned from Doom8088 text mode techniques
 - Built specifically for SIM card constraints
