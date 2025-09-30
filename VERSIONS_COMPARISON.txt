@@ -1,0 +1,39 @@
+TEXT DOOM - VERSION COMPARISON
+==============================
+
+MINIMAL (8KB RAM)                      | RAD-DOOM ENHANCED (64KB+ RAM)
+---------------------------------------|---------------------------------------
+                                       |
+########################################  ╔════════════════════════════════════════╗
+#         E                            #  ║::::::::::::::::::::::::::::::::::::::::║
+#    @>   *              a      +      #  ║:·:·:·:·:▓▓▓:·:·:·:·:·:·:·:·:·:·:·:·:·:║
+#                               X      #  ║:·:·@>···***·:·:·:·:·🔴:·💊··:·💰:·:·:║
+########################################  ║:·:·:·:·:·:·:·:·:·:·:·:·:·:·:·:·🌟:·:·:║
+HP:085 AM:12 L:1                         ╚════════════════════════════════════════╝
+                                         ╔════════════════════════════════════════╗
+                                         ║ HP:█████████████░░░░ 085 AMMO:12 L:1  ║
+                                         ╚════════════════════════════════════════╝
+
+Features:                              Features:
+- Basic ASCII graphics                 - Full ANSI color support
+- 20x20 maps                          - 60x40 maps (3x larger!)
+- 3 enemies max                       - 20 enemies max
+- 1 weapon                            - 4 weapon types
+- No effects                          - Particle effects
+- Monochrome                          - Dithering & shading
+- 40x25 display                       - 80x40 display possible
+
+Memory Usage:                         Memory Usage:
+- ~2KB total                          - ~8KB total
+- Fits any SIM card                   - Modern eSIM only
+
+Performance:                          Performance:
+- 10-15 FPS on SIM                    - 5-10 FPS on SIM
+- Minimal overhead                    - More processing needed
+
+Target Hardware:                      Target Hardware:
+- ANY SIM card (even 2000s era)       - Modern eSIM (2020+)
+- 8KB RAM minimum                     - 64KB RAM minimum
+
+The 8KB version is the engineering marvel - it runs on cards from 20 years ago!
+The 64KB version shows what's possible with modern hardware - approaching real Doom!
