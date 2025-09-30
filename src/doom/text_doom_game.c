@@ -1,14 +1,20 @@
 /*
  * Text-Based Doom Game Logic
  * Pure gameplay, no sound, no color, just ASCII
- * Designed to fit in 8KB SIM card memory
+ * Configurable for different SIM card memory sizes
  */
 
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
 
-// Game constants tuned for SIM card memory
+// Include configuration header if building with different memory targets
+#ifdef USE_CONFIG_HEADER
+#include "doom_config.h"
+#define BULLET_SPEED 2
+#define ENEMY_SPEED 4
+#else
+// Default configuration (8KB minimal) 
 #define SCREEN_W 40
 #define SCREEN_H 25
 #define MAP_W 32
@@ -17,6 +23,8 @@
 #define MAX_BULLETS 4
 #define BULLET_SPEED 2
 #define ENEMY_SPEED 4  // Moves every 4 frames
+#define MEMORY_SIZE_STR "8KB"
+#endif
 
 // Fixed-point math for positions (8.8 format)
 #define FP_SHIFT 8
