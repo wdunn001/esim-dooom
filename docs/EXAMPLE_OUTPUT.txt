@@ -1,0 +1,36 @@
+Example of what you'll see when running ./build/visual_test:
+
+╔════════════════════════════════════════╗
+║########################################║
+║#                                      #║
+║#                                      #║
+║#                                      #║
+║#    #########                         #║
+║#    #########                         #║
+║#    #########                         #║
+║#    #########                         #║
+║#    #########                         #║
+║#    ######### #                       #║
+║#              #                       #║
+║#         @    #                       #║
+║#              #                       #║
+║#              #                       #║
+║#              ##########              #║
+║#                                      #║
+║#                                      #║
+║#                                      #║
+║#                                      #║
+║#                                      #║
+║#                                      #║
+║#                                      #║
+║#                                      #║
+║########################################║
+╚════════════════════════════════════════╝
+
+Controls: W/A/S/D = Move, Q = Quit
+This is what would display on a SIM card (if it had a screen!)
+Move: 
+
+The @ symbol is you. Use WASD to move around.
+The # symbols are walls you can't walk through.
+This is running in just 8KB of memory!

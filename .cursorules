@@ -1,0 +1,40 @@
+# eSIM Doom Project Rules
+
+## Project Context
+This project aims to port Doom8088 to run on SIM card hardware, leveraging the computational capabilities of modern SIM cards and eSIM virtual machines.
+
+## Development Guidelines
+
+### Build System
+- Always use WSL2 with Ubuntu distro for building: `wsl -d Ubuntu`
+- Use cross-compilation toolchains appropriate for SIM card architecture
+- Consider memory constraints: SIM cards typically have very limited RAM (KB range)
+
+### Code Constraints
+- Optimize for minimal memory footprint
+- Use static memory allocation where possible
+- Avoid dynamic memory allocation
+- Consider using fixed-point arithmetic instead of floating-point
+- Keep stack usage minimal
+
+### SIM Card Specifics
+- SIM cards typically run JavaCard or similar restricted environments
+- Consider APDU command structure for communication
+- Remember security restrictions and sandboxing
+- eSIMs are virtualized but have similar constraints
+
+### Doom8088 Adaptation
+- Focus on the minimal core game loop
+- Strip non-essential features (sound, high-res graphics)
+- Consider tile-based rendering for memory efficiency
+- May need to implement custom memory management
+
+### Testing
+- Test in SIM card emulators first
+- Use PCSC tools for real hardware testing
+- Monitor memory usage constantly
+
+### Documentation
+- Document all hardware-specific adaptations
+- Keep track of memory usage for each component
+- Note any SIM card platform-specific APIs used
