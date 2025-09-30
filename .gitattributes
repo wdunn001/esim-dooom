@@ -1,0 +1,23 @@
+# Git attributes for Text Doom project
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Source files
+*.c text
+*.h text
+
+# Scripts
+*.sh text eol=lf
+
+# Documentation
+*.md text
+*.txt text
+
+# Build files
+Makefile text
+
+# Binary files
+*.exe binary
+*.o binary
+*.a binary

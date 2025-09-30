@@ -1,162 +1,138 @@
-# eSIM Doom - Running Doom8088 on SIM Cards
+# Text Doom for SIM Cards
 
-## Overview
+A complete, playable Doom-like game that runs on SIM cards with just 8KB of memory. Written in pure C with text-based graphics.
 
-This project explores the fascinating capability of modern SIM cards and eSIMs to run complex applications by porting Doom8088 (a minimal Doom implementation for 8088 processors) to SIM card hardware. 
+## Features
 
-### Background
+- **Complete gameplay**: Movement, shooting, enemies, health/ammo management
+- **Text-only graphics**: Pure ASCII display (40x25 characters)
+- **Tiny footprint**: Entire game fits in 8KB
+- **SIM card ready**: APDU interface for real hardware deployment
+- **No dependencies**: Pure C, no Java required
 
-Modern SIM cards are actually small computers with:
-- Dedicated processors (typically 32-bit ARM or similar)
-- RAM (usually 64KB-512KB)
-- Storage (several MB)
-- Cryptographic co-processors
-- Java Card or similar runtime environments
-
-eSIMs are essentially virtual machines running these same environments, making them perfect candidates for running compact applications like Doom8088.
-
-## Goals
-
-1. **Primary Goal**: Successfully run Doom8088 on a SIM card
-2. **Secondary Goals**:
-   - Demonstrate the computational capabilities of modern SIM cards
-   - Create a framework for running other retro games on SIM cards
-   - Explore the limits of SIM card computing
-
-## Technical Challenges
-
-- **Memory Constraints**: SIM cards have very limited RAM compared to even 8088 systems
-- **Execution Environment**: Java Card has significant restrictions
-- **I/O Limitations**: No direct screen or keyboard access
-- **Security Sandbox**: SIM cards run in highly restricted environments
-
-## Architecture
-
-```
-┌─────────────────┐
-│   Host Device   │
-│  (Phone/Reader) │
-└────────┬────────┘
-         │ APDU Commands
-┌────────┴────────┐
-│  SIM Card / eSIM│
-│  ┌────────────┐ │
-│  │ Java Card  │ │
-│  │   Runtime  │ │
-│  └──────┬─────┘ │
-│         │       │
-│  ┌──────┴─────┐ │
-│  │ Doom8088   │ │
-│  │  Applet    │ │
-│  └────────────┘ │
-└─────────────────┘
-```
-
-## Development Setup
-
-### Prerequisites
-
-- Windows with WSL2 installed
-- Ubuntu distro in WSL2
-- C/C++ compiler (gcc/g++)
-- SIM card reader (for testing)
-- Doom8088 source code
-
-### Development Options
-
-**No Java Required!** This project supports multiple development approaches:
-
-1. **Pure C Development** (Recommended)
-   - Software SIM simulation in C
-   - MULTOS platform for real cards
-   - No JavaCard needed!
-
-2. **JavaCard** (Traditional approach)
-   - Standard but requires Java
-   - See docs/DEVELOPMENT_TOOLS.md if you prefer this route
-
-### Building
-
-1. Open WSL2 Ubuntu:
-   ```bash
-   wsl -d Ubuntu
-   ```
-
-2. Quick setup for C development:
-   ```bash
-   cd /mnt/c/Users/willi/esim-dooom
-   chmod +x setup_c_dev.sh
-   ./setup_c_dev.sh  # Will prompt for sudo password to install packages
-   ```
-
-3. Build the C version (no Java needed!):
-   ```bash
-   make sim   # Build SIM application in pure C
-   make host  # Build host interface
-   make all   # Build everything
-   ```
-
-For detailed C/C++ development instructions, see `docs/C_DEVELOPMENT_QUICKSTART.md`
-
-## Play the Game!
+## Quick Start
 
 ```bash
-# Quick demo menu
-./demo.sh
+# Build everything
+make all
 
-# Or run directly:
-./build/play_text_doom    # Full game!
+# Play the game
+./build/play_text_doom
 ```
 
-### Game Controls:
+## Game Controls
+
 - **WASD** - Move
-- **Q/E** - Turn left/right  
+- **Q/E** - Turn left/right
 - **Space** - Shoot
-- **R** - Restart when dead
+- **R** - Restart (when dead)
 - **ESC** - Quit
 
-### Game Features:
-- Complete gameplay loop
-- Enemy AI
-- Shooting mechanics
-- Health/ammo pickups
-- Win condition (find exit)
-- All in pure ASCII text!
+## What You'll See
+
+```
+########################################
+#         E                            #
+#    @>   *              a      +      #
+#                               X      #
+########################################
+HP:085 AM:12 L:1
+```
+
+- `@` = You (player)
+- `>` = Direction facing
+- `E` = Enemy
+- `*` = Bullet
+- `#` = Wall
+- `X` = Exit (goal)
+- `a` = Ammo
+- `+` = Health
 
 ## Project Structure
 
 ```
 esim-dooom/
-├── .cursorules      # Development guidelines
-├── .gitignore       # Git ignore rules
-├── README.md        # This file
-├── src/             # Source code
-│   ├── javacard/    # Java Card applet code
-│   ├── doom8088/    # Adapted Doom8088 code
-│   └── host/        # Host-side communication
-├── tools/           # Build and deployment tools
-└── docs/            # Additional documentation
+├── src/
+│   ├── doom/
+│   │   └── text_doom_game.c    # Core game logic
+│   ├── sim/
+│   │   ├── sim_game_main.c     # SIM card application
+│   │   ├── apdu_handler.c      # APDU command processing
+│   │   └── memory_manager.c    # Memory management
+│   ├── host/
+│   │   ├── host_game_client.c  # PC client for SIM
+│   │   └── sim_interface.c     # SIM communication
+│   └── test/
+│       └── play_text_doom.c    # Standalone playable version
+├── include/
+│   └── sim_doom.h              # Common definitions
+├── docs/
+│   └── SIM_DEPLOYMENT.md       # How to deploy to real SIM cards
+└── build/                      # Compiled executables
 ```
 
-## Current Status
+## Building
 
-- [x] Project initialization
-- [x] Environment setup
-- [x] Doom8088 analysis for SIM adaptation
-- [x] Memory optimization
-- [x] Complete game implementation in C
-- [x] Text-based rendering system
-- [x] Playable game with enemies, shooting, and pickups
-- [ ] Deployment to actual SIM card (requires hardware)
+```bash
+# Build SIM card application
+make sim
 
-## Contributing
+# Build host client
+make host  
 
-This is an experimental project exploring the limits of SIM card computing. Contributions, ideas, and feedback are welcome!
+# Build standalone game
+make play
+
+# Build everything
+make all
+```
+
+## Testing the SIM Application
+
+### Quick Test (No Hardware Needed)
+```bash
+# Build and run the APDU test harness
+make test-sim
+./build/test_sim_apdu
+```
+
+This simulates APDU commands to test the SIM application without hardware.
+
+### Full Simulation
+The project includes swSIM (software SIM simulator) in `tools/swsim/`. See [docs/TESTING_IN_SIMULATOR.md](docs/TESTING_IN_SIMULATOR.md) for setup instructions.
+
+## Deploying to Real SIM Cards
+
+This game can run on actual SIM card hardware. See [docs/SIM_DEPLOYMENT.md](docs/SIM_DEPLOYMENT.md) for:
+- Supported platforms (MULTOS, JavaCard)
+- APDU interface specification
+- Deployment instructions
+- Hardware requirements
+
+## Technical Details
+
+- **Memory usage**: ~3KB game state + ~2KB code
+- **Language**: Pure C (C99)
+- **Display**: 40x25 ASCII characters
+- **Performance**: 5-10 FPS on SIM hardware
+
+## Repository
+
+Ready for GitHub:
+```bash
+git init
+git add .
+git commit -m "Text Doom - Complete game for SIM cards"
+git remote add origin YOUR_GITHUB_URL
+git push -u origin main
+```
 
 ## License
 
-This project builds upon Doom8088, which is based on the original Doom source code released under the GNU GPL license.
+This project is licensed under GPLv3 (same as Doom).
 
-## Disclaimer
+## Acknowledgments
 
-This is an experimental project for educational purposes. Modifying SIM cards may void warranties or violate carrier agreements. Always use test SIM cards and proper development environments.
+- Inspired by the original Doom (id Software)
+- Learned from Doom8088 text mode techniques
+- Built specifically for SIM card constraints

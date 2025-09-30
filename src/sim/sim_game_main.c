@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 // SIM Card constraints
 #define SIM_RAM_SIZE 8192
@@ -31,6 +32,10 @@
 // Global game state (stored in SIM memory)
 static GameState game;
 static bool initialized = false;
+
+// Function prototypes for SIM card communication
+uint16_t receive_apdu(uint8_t* buffer);
+void send_apdu(const uint8_t* buffer, uint16_t len);
 
 // Process APDU commands
 void process_apdu(const uint8_t* cmd, uint16_t cmd_len, 
@@ -180,3 +185,13 @@ void send_apdu(const uint8_t* buffer, uint16_t len) {
 // Code: ~2KB  
 // Stack/misc: ~1KB
 // Total: ~6KB - fits comfortably in 8KB SIM memory!
+
+#ifdef TEST_BUILD
+// Test main for standalone testing
+int main(void) {
+    printf("Text Doom SIM Application\n");
+    printf("GameState size: %zu bytes\n", sizeof(GameState));
+    printf("This would run on a SIM card via APDU commands.\n");
+    return 0;
+}
+#endif
